@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            div{ 
+                text-align: center;
+                width: 100%;}
+            button
+            {
+                text-align: center;
+                width:100%;
+                padding: 6px 12px;
+                border-color:black ;
+                color: aliceblue;
+                border-radius: 50%;
+                transition: 0.3s;
+                font-size: 16px;
+                cursor: pointer;
+                opacity: 0.6;
+                width:60px;
+                height:60px;
+            }
+            button:hover {opacity: 1;}
+            .Green
+            {
+                background-color: darkblue;
+            }
+            .Purple
+            {
+                background-color:darkgoldenrod
+            }
+            .Blue
+            {
+                background-color: blueviolet;
+            }
+            .Twin1
+            {
+                background-color: cyan;
+            }
+        </style>
+    </head>
+  <body>
+<div>
+<button class="Green">G</button>
+<button class="Purple">X</button>
+<button class="Green">E</button>
+<button class="Twin1">1</button>
+<button class="Blue">1</button>
+<button class="Twin1">0</button>   
+</div>
+</body>
+</html>
