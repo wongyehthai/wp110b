@@ -1,0 +1,146 @@
+> let text="name:wong age:52 weight:120 hobby:watch anime iq=0"
+undefined
+> let re =/[0-9]/
+undefined
+> text.match(re)
+[ "5" ]
+> let text2="my email is wong@nqu.student.edu.nqu.tw , wong@wowng"
+undefined
+> let re10 = /\w+@\w+/
+undefined
+> text2.match(re10)
+[ "wong@nqu" ]
+> let re10 = /\w+@\w+/g
+undefined
+> text2.match(re10)
+[ "wong@nqu", "wong@wowng" ]
+> let re10 = /\w+@\w+\./g
+undefined
+> text2.match(re10)
+[ "wong@nqu." ]
+> let text2="my email is wong@nqu.student.edu.nqu.tw , wong@wowng."
+undefined
+> text2.match(re10)
+[ "wong@nqu.", "wong@wowng." ]
+> let re10 = /\w+@\w+\.[\w\.]+/g
+undefined
+> text2.match(re10)
+[ "wong@nqu.student.edu.nqu.tw" ]
+> let re10 = /\w+@\w+\.[\w]+/g
+undefined
+> text2.match(re10)
+[ "wong@nqu.student" ]
+> let re10 = /\w+@\w+\.[\w\.]+/g
+undefined
+> text2.match(re10)
+[ "wong@nqu.student.edu.nqu.tw" ]
+> let re2=/[0-9]/g
+undefined
+> text.match(re2)
+[ "5", "2", "1", "2", "0", "0" ]
+>
+undefined
+> let re2=/[0-9]+/g
+undefined
+> text.match(re2)
+[ "52", "120", "0" ]
+> let re3= /[0-9a-zA-Z]+/g
+undefined
+> text.match(re3)
+[
+  "name",   "wong",
+  "age",    "52",
+  "weight", "120",
+  "hobby",  "watch",
+  "anime",  "iq",
+  "0"
+]
+> let re3= /[0-9a-zA-Z]+\n/g
+undefined
+> text.match(re3)
+null
+> let re3= /[0-9a-zA-Z]+/g
+undefined
+> text.match(re3)
+[
+  "name",   "wong",
+  "age",    "52",
+  "weight", "120",
+  "hobby",  "watch",
+  "anime",  "iq",
+  "0"
+]
+> re4=/\w+/
+Uncaught ReferenceError: re4 is not defined
+    at <anonymous>:2:5
+> re4=/[\w]+/
+Uncaught ReferenceError: re4 is not defined
+    at <anonymous>:2:5
+> let re4= /:([0-9a-zA-Z])+/g
+undefined
+> text.match(re4)
+[ ":wong", ":52", ":120", ":watch" ]
+> let re5= /=([0-9a-zA-Z])+/g
+undefined
+> text.match(re5)
+[ "=0" ]
+> let re6= /:([0-9a-zA-Z])+/
+undefined
+> text.match(re6)
+[ ":wong", "g" ]
+> let re6= /:([0-9a-zA-Z]+)/
+undefined
+> text.match(re6)
+[ ":wong", "wong" ]
+> let re6= /:([0-9a-zA-Z])/
+undefined
+> text.match(re6)
+[ ":w", "w" ]
+> let re6= /:([0-9a-zA-Z])/g
+undefined
+> text.match(re6)
+[ ":w", ":5", ":1", ":w" ]
+> let re7 =/\d+/
+undefined
+> text.match(re7)
+[ "52" ]
+> let re7 =/\d+/g
+undefined
+> text.match(re7)
+[ "52", "120", "0" ]
+> let re7 =/:\d+/g
+undefined
+> text.match(re7)
+[ ":52", ":120" ]
+> let re7 =/=\d+/g
+undefined
+> text.match(re7)
+[ "=0" ]
+> let re8 =/=\D+/g
+undefined
+> text.match(re8)
+null
+> let re8 =/\D+/g
+undefined
+> text.match(re8)
+[ "name:wong age:", " weight:", " hobby:watch anime iq=" ]
+> let text2=text + 'abc     cccc@q ....'
+undefined
+> text2
+"name:wong age:52 weight:120 hobby:watch anime iq=0abc     cccc@q ...."
+>  let text2="my email is wong@nqu.student.edu.nqu.tw , wong@wowng."
+undefined
+> text2
+"my email is wong@nqu.student.edu.nqu.tw , wong@wowng."
+> let text3=text2 + 'abc     cccc@q ....'
+undefined
+> text3
+"my email is wong@nqu.student.edu.nqu.tw , wong@wowng.abc     cccc@q ...."
+> text3.match(re10)
+[ "wong@nqu.student.edu.nqu.tw", "wong@wowng.abc" ]
+> re10
+/\w+@\w+\.[\w\.]+/g
+> let re11 = /\w+@\w+\.+\w+\.[\w\.]+/g
+undefined
+> text3.match(re11)
+[ "wong@nqu.student.edu.nqu.tw" ]
