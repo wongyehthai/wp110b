@@ -1,4 +1,4 @@
-## 本程式參考來源：https://developer.mozilla.org/zh-TW/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript
+## 本程式參考的基礎模板來源：https://developer.mozilla.org/zh-TW/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript
 ## 部分采用：https://www.w3schools.com/ 上的程式碼
 ## 圖片應用來源 ：
 
