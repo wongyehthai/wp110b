@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>彈球小游戲</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: aquamarine;
+        }
+
+        .button {
+            color: crimson;
+            background-color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            margin: auto;
+            padding: 6px 15px;
+            font-family: 'Times New Roman';
+            font-weight: bold;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+        }
+
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .button3 {
+            background-color: white;
+            color: black;
+            border: 2px solid #f44336;
+        }
+
+        .button3:hover {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .button4 {
+            background-color: white;
+            color: black;
+            border: 2px solid #9e36f4;
+        }
+
+        .button4:hover {
+            background-color: #9e36f4;
+            color: white;
+        }
+
+        * {
+            padding-top: 0;
+            margin-top: 6%;
+        }
+
+        canvas {
+            background: url('https://th.bing.com/th/id/OIP.JIwIoRJO03tbuzWgfvcvCgHaEK?w=302&h=180&c=7&r=0&o=5&pid=1.7');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: block;
+            margin: 0 auto;
+            border: 4pt black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="gameboard" width="480" height="320"></canvas>
+    <button id="hard" class="button button3">Hard</button>
+    <button id="normal" class="button button2">Normal</button>
+    <button id="easy" class="button button1">Easy</button>
+    <button id="reset" class="button button4">Restart</button>
+
+    <script>
+        var canvas = document.getElementById("gameboard");//讀到上面的canvas
+        var gxe = canvas.getContext("2d");//canvas獨有渲染函數取得
+        var x = canvas.width / 2;
+        var y = canvas.height - 20;
+        var px = 2;
+        var py = -2;
+        var ballRadius = 10;
+        var woodHeight = 10;
+        var woodWidth = 75;
+        var woodMidP = (canvas.width - woodWidth) / 2;
+        var rightmove = false;
+        var leftmove = false;
+        var brickRow = 5;
+        var brickCollumn = 4;
+        var brickHeight = 20;
+        var brickWidth = 75;
+        var brickPadding = 10;//磚塊之間空隙
+        var Topwall = 30;
+        var Leftwall = 30;//爲了不讓它們從墻壁開始畫
+        var score = 0;
+        var lives = 3;
+        var start = 0;
+        var modetype = 'easy';
+        var timecount=0;
+
+        var bricks = [];
+        for (var i = 0; i < brickCollumn; i++) {
+            bricks[i] = [];
+            for (var j = 0; j < brickRow; j++) {
+                bricks[i][j] = { x: 0, y: 0, status: 1 };
+            }
+        }
+
+        document.addEventListener("keydown", keyDown, false);
+        document.addEventListener("keyup", keyUp, false);
+        document.addEventListener("mousemove", mouseMoveCheck, false);
+
+        document.getElementById("hard").addEventListener("click", hardmode);
+        document.getElementById("normal").addEventListener("click", normalmode);
+        document.getElementById("easy").addEventListener("click", easymode);
+        document.getElementById("reset").addEventListener("click", reset);
+
+        function timer(){
+            if(start==1)
+            timecount++;
+        }
+        function hardmode() {
+            if (px < 0) {
+                px = px / px * 5 * -1;
+            }
+            else px = px / px * 5;
+            if (py < 0) {
+                py = py / py * 5 * -1;
+            }
+            else py = py / py * 5;
+            for (var i = 0; i < brickCollumn; i++) {
+                for (var j = 0; j < brickRow; j++) {
+                    var brickmodel = bricks[i][j];
+                    if(brickmodel.status!=0)
+                    {
+                    brickmodel.status=2;
+                    }
+                }
+            }
+            modetype = 'hard';
+        }
+        function normalmode() {
+            if (px < 0) {
+                px = px / px * 4 * -1;
+            }
+            else px = px / px * 4;
+            if (py < 0) {
+                py = py / py * 4 * -1;
+            }
+            else py = py / py * 4;
+            for (var i = 0; i < brickCollumn; i++) {
+                for (var j = 0; j < brickRow; j++) {
+                    var brickmodel = bricks[i][j];
+                    if(brickmodel.status!=0)
+                    {
+                    brickmodel.status=1;
+                    }
+                }
+            }
+            modetype = 'normal';
+        }
+        function easymode() {
+            if (px < 0) {
+                px = px / px * 2 * -1;
+            }
+            else px = px / px * 2;
+            if (py < 0) {
+                py = py / py * 2 * -1;
+            }
+            else py = py / py * 2;
+            for (var i = 0; i < brickCollumn; i++) {
+                for (var j = 0; j < brickRow; j++) {
+                    var brickmodel = bricks[i][j];
+                    if(brickmodel.status!=0)
+                    {
+                    brickmodel.status=1;
+                    }
+                }
+            }
+            modetype = 'easy';
+        }
+        function reset() {
+            document.location.reload();
+        }
+
+        function keyUp(e) {
+            if (e.keyCode == 39) {
+                rightmove = false;
+            }
+            else if (e.keyCode == 37) {
+                leftmove = false;
+            }
+        }
+        function keyDown(e) {
+            if (e.keyCode == 39) {
+                rightmove = true;
+            }
+            else if (e.keyCode == 37) {
+                leftmove = true;
+            }
+            else if (e.keyCode == 32) {
+                start = 1;
+            }
+        }
+        function mouseMoveCheck(e) {
+            var relativeX = e.clientX - canvas.offsetLeft;
+            if (relativeX > woodWidth && relativeX < canvas.width) {
+                woodMidP = relativeX - woodWidth;
+            }
+        }
+        function hit() {
+            for (i = 0; i < brickCollumn; i++) {
+                for (j = 0; j < brickRow; j++) {
+                    var brickmodel = bricks[i][j];
+                    if (brickmodel.status > 0) {
+                        if (x > brickmodel.x && x < brickmodel.x + brickWidth && y > brickmodel.y && y < brickmodel.y + brickHeight) {
+                            py *= -1;
+                            brickmodel.status--;
+                            if (brickmodel.status == 0) {
+                                score++;
+                            }
+                            if (score == brickCollumn * brickRow) {
+                                alert("YOU WIN,CONGRATULATIONs!"+"\n"+"Game Time:"+timecount);
+                                document.location.reload();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        function timeshow(){
+            gxe.font = "normal bold 18px Times New Roman";
+            gxe.fillStyle = "black";
+            gxe.fillText("Time:" + timecount, 90, 20);//要顯示的字，x，y，粗度調整
+        }
+        function scoreshow() {
+            gxe.font = "normal bold 18px Times New Roman";
+            gxe.fillStyle = "black";
+            gxe.fillText("Score:" + score, 8, 20);//要顯示的字，x，y，粗度調整
+        }
+        function liveshow() {
+            gxe.font = "normal bold 18px Times New Roman";
+            gxe.fillStyle = "black";
+            gxe.fillText("Lives:" + lives, canvas.width - 65, 20);
+        }
+        function modeshow() {
+            gxe.font = "normal bold 18px Times New Roman";
+            gxe.fillStyle = "＃00FF00";
+            gxe.fillText("Mode:" + modetype, canvas.width / 2 - 45, 20);
+        }
+        function drawboder() {
+            gxe.beginPath();
+            gxe.rect(0, 0, canvas.width, canvas.height);
+            gxe.lineWidth = 2;
+            gxe.strokeStyle = "black";
+            gxe.stroke();
+            gxe.closePath();
+        }
+        function drawBall() {
+            if (start == 0) {
+                x = woodMidP + woodWidth / 2;
+            }
+            gxe.beginPath();
+            gxe.arc(x, y-5, ballRadius, 0, Math.PI * 2);
+            gxe.lineWidth = 3;
+            gxe.strokeStyle = "black";
+            gxe.fillStyle = "grey";
+            gxe.stroke();
+            gxe.fill();
+            gxe.closePath();
+        }
+        function drawwood() {
+            gxe.beginPath();
+            var woodpic = new Image();
+            woodpic.src = 'wood.jpg';
+            var pat = gxe.createPattern(woodpic, 'no-repeat');
+            gxe.rect(woodMidP, canvas.height - woodHeight-5, woodWidth, woodHeight);
+            gxe.fillStyle = pat;
+            gxe.lineWidth = 1;
+            gxe.strokeStyle = "black";
+            gxe.stroke();
+            gxe.fill();
+            gxe.closePath();
+        }
+        function drawbricks() {
+            for (var i = 0; i < brickCollumn; i++) {
+                for (var j = 0; j < brickRow; j++) {
+                    if (bricks[i][j].status > 0) {
+                        var brickX = (j * (brickWidth + brickPadding)) + Leftwall;
+                        var brickY = (i * (brickHeight + brickPadding)) + Topwall;
+                        bricks[i][j].x = brickX;
+                        bricks[i][j].y = brickY;
+                        gxe.beginPath();
+                        var woodpic = new Image();
+                        woodpic.src = 'brick2.jpg';
+                        var pat = gxe.createPattern(woodpic, 'repeat');
+                        gxe.rect(brickX, brickY, brickWidth, brickHeight);
+                        gxe.lineWidth = 2;
+                        gxe.fillStyle = pat;
+                        gxe.strokeStyle = "black";
+                        gxe.stroke();
+                        gxe.fill();
+                        gxe.closePath();
+                    }
+                }
+            }
+        }
+        function draw() {
+            gxe.clearRect(0, 0, canvas.width, canvas.height);
+            drawboder();
+            drawbricks();
+            drawBall();
+            drawwood();
+            hit();
+            scoreshow();
+            liveshow();
+            modeshow();
+            timeshow();
+            if (x + px > canvas.width - ballRadius || x + px < ballRadius) px *= -1;
+            if (y + py < ballRadius) py *= -1;
+            else if (y + py > canvas.height - ballRadius) {
+                if (x > woodMidP && x < woodMidP + woodWidth) {
+                    py *= -1;
+                }
+                else {
+                    lives--;
+                    if (lives == 0) {
+                        alert("GAME OVER");
+                        document.location.reload();
+                    }
+                    else {
+                        start = 0;
+                        x = canvas.width / 2;
+                        y = canvas.height - 20;
+                        woodMidP = (canvas.width - woodWidth) / 2;
+                    }
+                }
+            }
+            if (rightmove && woodMidP < canvas.width - woodWidth) woodMidP += 7;
+            else if (leftmove && woodMidP > 0) woodMidP -= 7;
+            if (start == 1) {
+                x += px;
+                y += py;
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+       setInterval(timer,1000);
+    </script>
+
+</body>
+
+</html>
