@@ -112,7 +112,7 @@
         var lives = 3;
         var start = 0;
         var modetype = 'easy';
-        var timecount=0;
+        var timecount = 0;
 
         var bricks = [];
         for (var i = 0; i < brickCollumn; i++) {
@@ -131,9 +131,9 @@
         document.getElementById("easy").addEventListener("click", easymode);
         document.getElementById("reset").addEventListener("click", reset);
 
-        function timer(){
-            if(start==1)
-            timecount++;
+        function timer() {
+            if (start == 1)
+                timecount++;
         }
         function hardmode() {
             if (px < 0) {
@@ -147,9 +147,8 @@
             for (var i = 0; i < brickCollumn; i++) {
                 for (var j = 0; j < brickRow; j++) {
                     var brickmodel = bricks[i][j];
-                    if(brickmodel.status!=0)
-                    {
-                    brickmodel.status=2;
+                    if (brickmodel.status != 0) {
+                        brickmodel.status = 2;
                     }
                 }
             }
@@ -167,9 +166,8 @@
             for (var i = 0; i < brickCollumn; i++) {
                 for (var j = 0; j < brickRow; j++) {
                     var brickmodel = bricks[i][j];
-                    if(brickmodel.status!=0)
-                    {
-                    brickmodel.status=1;
+                    if (brickmodel.status != 0) {
+                        brickmodel.status = 1;
                     }
                 }
             }
@@ -187,9 +185,8 @@
             for (var i = 0; i < brickCollumn; i++) {
                 for (var j = 0; j < brickRow; j++) {
                     var brickmodel = bricks[i][j];
-                    if(brickmodel.status!=0)
-                    {
-                    brickmodel.status=1;
+                    if (brickmodel.status != 0) {
+                        brickmodel.status = 1;
                     }
                 }
             }
@@ -236,7 +233,7 @@
                                 score++;
                             }
                             if (score == brickCollumn * brickRow) {
-                                alert("YOU WIN,CONGRATULATIONs!"+"\n"+"Game Time:"+timecount);
+                                alert("YOU WIN,CONGRATULATIONs!" + "\n" + "Game Time:" + timecount);
                                 document.location.reload();
                             }
                         }
@@ -244,7 +241,7 @@
                 }
             }
         }
-        function timeshow(){
+        function timeshow() {
             gxe.font = "normal bold 18px Times New Roman";
             gxe.fillStyle = "black";
             gxe.fillText("Time:" + timecount, 90, 20);//要顯示的字，x，y，粗度調整
@@ -261,7 +258,7 @@
         }
         function modeshow() {
             gxe.font = "normal bold 18px Times New Roman";
-            gxe.fillStyle = "＃00FF00";
+            gxe.fillStyle = "black";
             gxe.fillText("Mode:" + modetype, canvas.width / 2 - 45, 20);
         }
         function drawboder() {
@@ -277,10 +274,13 @@
                 x = woodMidP + woodWidth / 2;
             }
             gxe.beginPath();
-            gxe.arc(x, y-5, ballRadius, 0, Math.PI * 2);
-            gxe.lineWidth = 3;
+            gxe.arc(x, y - 5, ballRadius, 0, Math.PI * 2);
+            var woodpic = new Image();
+            woodpic.src = 'th.jfif';//https://wallpapercave.com/wp/wp2554608.jpg
+            var pat = gxe.createPattern(woodpic, 'repeat');
+            gxe.lineWidth = 1;
             gxe.strokeStyle = "black";
-            gxe.fillStyle = "grey";
+            gxe.fillStyle = pat;
             gxe.stroke();
             gxe.fill();
             gxe.closePath();
@@ -288,9 +288,9 @@
         function drawwood() {
             gxe.beginPath();
             var woodpic = new Image();
-            woodpic.src = 'wood.jpg';
+            woodpic.src = 'wood.jpg';//https://muku-store.com/user_data/img/contents/basic_knowledge/about_wood02.jpg
             var pat = gxe.createPattern(woodpic, 'no-repeat');
-            gxe.rect(woodMidP, canvas.height - woodHeight-5, woodWidth, woodHeight);
+            gxe.rect(woodMidP, canvas.height - woodHeight - 5, woodWidth, woodHeight);
             gxe.fillStyle = pat;
             gxe.lineWidth = 1;
             gxe.strokeStyle = "black";
@@ -308,7 +308,7 @@
                         bricks[i][j].y = brickY;
                         gxe.beginPath();
                         var woodpic = new Image();
-                        woodpic.src = 'brick2.jpg';
+                        woodpic.src = 'brick2.jpg';//https://images.pexels.com/photos/268976/pexels-photo-268976.jpeg
                         var pat = gxe.createPattern(woodpic, 'repeat');
                         gxe.rect(brickX, brickY, brickWidth, brickHeight);
                         gxe.lineWidth = 2;
@@ -361,7 +361,7 @@
             requestAnimationFrame(draw);
         }
         draw();
-       setInterval(timer,1000);
+        setInterval(timer, 1000);
     </script>
 
 </body>
