@@ -2,10 +2,10 @@
 ## 部分采用：https://www.w3schools.com/ 上的程式碼
 ## 圖片應用來源 ：
 
-1.磚塊(https://images.pexels.com/photos/268976/pexels-photo-268976.jpeg)<br>
-2.木板(https://muku-store.com/user_data/img/contents/basic_knowledge/about_wood02.jpg)<br>
-3.背景天空(https://th.bing.com/th/id/OIP.JIwIoRJO03tbuzWgfvcvCgHaEK?w=302&h=180&c=7&r=0&o=5&pid=1.7)<br>
-4.球(https://wallpapercave.com/wp/wp2554608.jpg)
+1.[磚塊](https://www.istockphoto.com/photo/brick-wall-background-gm92660707-2704645)<br>
+2.[木板](https://www.istockphoto.com/photo/clean-pine-wood-texture-banner-gm1226435001-361357750)<br>
+3.[背景天空](https://www.istockphoto.com/photo/blue-sky-with-scattered-clouds-gm106577335-13966197)<br>
+4.[球](https://www.istockphoto.com/vector/space-background-with-stardust-and-shining-stars-realistic-colorful-cosmos-with-gm1143822786-307318116)
 ## 游戲説明<br>
 這是一款很普通的彈球游戲，采用了canvas來進行繪製並達成游戲效果。<br>
 勝利條件為打掉所有可見的磚塊。<br>
@@ -25,7 +25,7 @@
 ## 游戲製作過程及心得
 上網偶然發現的簡單游戲製作過程，且寫得非常之詳細，於是乎開始一步一步地跟著參考質料的步驟做後，漸漸地瞭解了canvas這個東西。途中有嘗試在ball的fillStyle中導入圖片，
 結果發現圖片不會跟著球移動最後就選擇了一些背景圖來當作球。
-過程中嘗試將自己的想法加入了其中，雖然最終成果並沒有如自己預期的完美，希望大家還是會喜歡。
+過程中嘗試將自己的想法加入了其中，例如球不會開局就自己動起來，難度的調整（速度的變化與給予板塊的生命值），時間的計算，模式的顯示，雖然最終成果並沒有如自己預期的完美，希望大家還是會喜歡。
 
 
 
