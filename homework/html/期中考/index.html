@@ -71,7 +71,7 @@
         }
 
         canvas {
-            background: url('https://th.bing.com/th/id/OIP.JIwIoRJO03tbuzWgfvcvCgHaEK?w=302&h=180&c=7&r=0&o=5&pid=1.7');
+            background: url('sky.jpg');/*https://www.istockphoto.com/photo/blue-sky-with-scattered-clouds-gm106577335-13966197*/
             background-repeat: no-repeat;
             background-size: cover;
             display: block;
@@ -276,7 +276,7 @@
             gxe.beginPath();
             gxe.arc(x, y - 5, ballRadius, 0, Math.PI * 2);
             var woodpic = new Image();
-            woodpic.src = 'th.jfif';//https://wallpapercave.com/wp/wp2554608.jpg
+            woodpic.src = 'ball.jpg';//https://www.istockphoto.com/vector/space-background-with-stardust-and-shining-stars-realistic-colorful-cosmos-with-gm1143822786-307318116
             var pat = gxe.createPattern(woodpic, 'repeat');
             gxe.lineWidth = 1;
             gxe.strokeStyle = "black";
@@ -288,8 +288,8 @@
         function drawwood() {
             gxe.beginPath();
             var woodpic = new Image();
-            woodpic.src = 'wood.jpg';//https://muku-store.com/user_data/img/contents/basic_knowledge/about_wood02.jpg
-            var pat = gxe.createPattern(woodpic, 'no-repeat');
+            woodpic.src = 'wood.jpg';//https://www.istockphoto.com/photo/clean-pine-wood-texture-banner-gm1226435001-361357750
+            var pat = gxe.createPattern(woodpic, 'repeat');
             gxe.rect(woodMidP, canvas.height - woodHeight - 5, woodWidth, woodHeight);
             gxe.fillStyle = pat;
             gxe.lineWidth = 1;
@@ -308,7 +308,7 @@
                         bricks[i][j].y = brickY;
                         gxe.beginPath();
                         var woodpic = new Image();
-                        woodpic.src = 'brick2.jpg';//https://images.pexels.com/photos/268976/pexels-photo-268976.jpeg
+                        woodpic.src = 'brick.jpg';//https://www.istockphoto.com/photo/brick-wall-background-gm92660707-2704645
                         var pat = gxe.createPattern(woodpic, 'repeat');
                         gxe.rect(brickX, brickY, brickWidth, brickHeight);
                         gxe.lineWidth = 2;
